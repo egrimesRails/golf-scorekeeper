@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout 
+    android:id="@+id/RelativeLayout01" 
+    android:layout_width="fill_parent" 
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <NumberPicker
+        android:id="@+id/scorePicker1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/holeLabel"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp" />
+
+    <NumberPicker
+        android:id="@+id/puttsPicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/scorePicker1"
+        android:layout_below="@+id/scorePicker1"
+        android:layout_marginTop="60dp" />
+
+    <TextView
+        android:id="@+id/scoreLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/scorePicker1"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="56dp"
+        android:layout_marginLeft="15dp"
+        android:text="@string/score_label" />
+
+    <TextView
+        android:id="@+id/puttsLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/puttsPicker"
+        android:layout_alignLeft="@+id/scoreLabel"
+        android:layout_marginBottom="53dp"
+        android:text="@string/putts_label" />
+
+    <TextView
+        android:id="@+id/holeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="15dp"
+        android:layout_toRightOf="@+id/scoreLabel"
+        android:text="@string/hole_number_label" />
+
+    <TextView
+        android:id="@+id/holeNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/holeLabel"
+        android:layout_alignBottom="@+id/holeLabel"
+        android:layout_centerHorizontal="true"
+        android:text="actualHoleNumber" />
+    
+</RelativeLayout>

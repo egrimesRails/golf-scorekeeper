@@ -2,7 +2,9 @@
 <resources>
 
     <string name="app_name">Golf Scorekeeper</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="hole_number_label">Hole:</string>
+    <string name="score_label">Score:</string>
+    <string name="putts_label">Putts:</string>
 
 </resources>
