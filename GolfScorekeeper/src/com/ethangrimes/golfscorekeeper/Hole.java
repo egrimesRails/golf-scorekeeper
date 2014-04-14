@@ -1,8 +1,7 @@
 package com.ethangrimes.golfscorekeeper;
 
+import java.util.Date;
 import java.util.UUID;
-
-import android.widget.NumberPicker;
 
 public class Hole {
 	
@@ -11,6 +10,7 @@ public class Hole {
 	private int mScore;
 	private int mPutts;
 	private int mHoleNumber;
+	private Date mDate;
 	
 	//textView labels
 	
@@ -70,5 +70,19 @@ public class Hole {
 	 */
 	public UUID getHoleId() {
 		return mHoleId;
+	}
+
+	/**
+	 * @return the date
+	 */
+	public Date getDate() {
+		return mDate;
+	}
+
+	/**
+	 * @param date the date to set
+	 */
+	public void setDate(Date date) {
+		mDate = date;
 	}
 }
