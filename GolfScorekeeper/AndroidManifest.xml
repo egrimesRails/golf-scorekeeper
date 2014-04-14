@@ -13,15 +13,21 @@
         android:icon="@drawable/golficon"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Holo">
-        <activity
-            android:name="com.ethangrimes.golfscorekeeper.HoleActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" >
+        
+        <activity android:name=".HoleListActivity"
+             	  android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        
+        <activity
+            android:name="com.ethangrimes.golfscorekeeper.HoleActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            
         </activity>
     </application>
 

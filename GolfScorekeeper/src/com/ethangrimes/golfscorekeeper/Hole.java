@@ -9,7 +9,7 @@ public class Hole {
 	private UUID mHoleId;
 	private int mScore;
 	private int mPutts;
-	private int mHoleNumber;
+	private String mHoleNumber;
 	private Date mDate;
 	
 	//textView labels
@@ -54,21 +54,21 @@ public class Hole {
 	/**
 	 * @return the holeNumber
 	 */
-	public int getHoleNumber() {
+	public String getHoleNumber() {
 		return mHoleNumber;
 	}
 
 	/**
 	 * @param holeNumber the holeNumber to set
 	 */
-	public void setHoleNumber(int holeNumber) {
+	public void setHoleNumber(String holeNumber) {
 		mHoleNumber = holeNumber;
 	}
 
 	/**
 	 * @return the holeId
 	 */
-	public UUID getHoleId() {
+	public UUID getId() {
 		return mHoleId;
 	}
 
@@ -85,4 +85,14 @@ public class Hole {
 	public void setDate(Date date) {
 		mDate = date;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return mHoleNumber;
+	}
+	
+	
 }

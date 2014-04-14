@@ -2,17 +2,12 @@ package com.ethangrimes.golfscorekeeper;
 
 import android.app.Fragment;
 
-
-
-
-
-public class HoleActivity extends SingleFragmentActivity {
+public class HoleListActivity extends SingleFragmentActivity {
 
 	@Override
 	protected Fragment createFragment() {
 		
-		return new HoleFragment();
+		return new HoleListFragment();
 	}
-	
-	
+
 }

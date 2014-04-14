@@ -6,5 +6,6 @@
     <string name="hole_number_label">Hole</string>
     <string name="score_label">Score</string>
     <string name="putts_label">Putts</string>
+    <string name="holes_list_title">Touch a hole to edit</string>
 
 </resources>
