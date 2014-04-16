@@ -30,6 +30,9 @@ public final class R {
         public static final int fragmentContainer=0x7f070000;
         public static final int holeLabel=0x7f070003;
         public static final int holeNumber=0x7f070002;
+        public static final int list_hole=0x7f070009;
+        public static final int list_putts=0x7f07000a;
+        public static final int list_score=0x7f070008;
         public static final int puttsLabel=0x7f070007;
         public static final int puttsPicker=0x7f070006;
         public static final int scoreLabel=0x7f070004;
@@ -38,6 +41,7 @@ public final class R {
     public static final class layout {
         public static final int activity_fragment=0x7f030000;
         public static final int fragment_hole=0x7f030001;
+        public static final int list_item_holes=0x7f030002;
     }
     public static final class string {
         public static final int action_settings=0x7f050001;
