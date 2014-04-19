@@ -2,15 +2,13 @@ package com.ethangrimes.golfscorekeeper;
 
 import java.util.UUID;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.NumberPicker;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 /**Controller which interacts with model
@@ -37,7 +35,7 @@ public class HoleFragment extends Fragment {
 		
 		super.onCreate(savedInstanceState);
 		
-		UUID holeID = (UUID)getActivity().getIntent().getSerializableExtra(EXTRA_HOLE_ID);
+		UUID holeID = (UUID)getArguments().getSerializable(EXTRA_HOLE_ID);
 		
 		mHole = HoleSingleton.get(getActivity()).getHole(holeID);
 	}
@@ -98,6 +96,25 @@ public class HoleFragment extends Fragment {
 		
 		
 		return v;
+	}
+	
+	
+	/**Created new instance method to pass id through fragments*/
+	public static HoleFragment newInstance(UUID holeId) {
+		
+		//create new bundle
+		Bundle args = new Bundle();
+		
+		//add serializable data to the bundle
+		args.putSerializable(EXTRA_HOLE_ID, holeId);
+		
+		//create a fragment instance
+		HoleFragment fragment = new HoleFragment();
+		
+		//attach arguments to the fragment
+		fragment.setArguments(args);
+		
+		return fragment;
 	}
 	
 	

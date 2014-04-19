@@ -1,6 +1,6 @@
 package com.ethangrimes.golfscorekeeper;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 
 public class HoleListActivity extends SingleFragmentActivity {
 

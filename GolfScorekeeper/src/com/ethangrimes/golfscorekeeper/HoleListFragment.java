@@ -5,16 +5,15 @@ package com.ethangrimes.golfscorekeeper;
 
 import java.util.ArrayList;
 
-import android.app.ListFragment;
-import android.content.Context;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * @author Ethan
@@ -49,8 +48,8 @@ public class HoleListFragment extends ListFragment {
 		//Get the hole from the adapter
 		Hole c = ((HoleAdapter)getListAdapter()).getItem(position);
 		
-		//Start holeActivity on a list item click, adding the hole id to intent
-		Intent i = new Intent(getActivity(), HoleActivity.class);
+		//Start HolePagerActivity on a list item click, adding the hole id to intent
+		Intent i = new Intent(getActivity(), HolePagerActivity.class);
 		
 		i.putExtra(HoleFragment.EXTRA_HOLE_ID, c.getId());
 		
@@ -79,20 +78,35 @@ public class HoleListFragment extends ListFragment {
 			//Configure the view for one hole list item
 			Hole c = getItem(position);
 			
-			//set hole text
+			//set hole text and get variable
 			TextView holeNumberTextView = (TextView) convertView.findViewById(R.id.list_hole);
 			holeNumberTextView.setText("Hole# " + c.getHoleNumber());
 			
-			//set score text
+			//set score text and get score
 			TextView scoreTextView = (TextView) convertView.findViewById(R.id.list_score);
 			scoreTextView.setText("Score:" + c.getScore());
 			
-			//set putts score
+			//set putts score and get putts
 			TextView puttsTextView = (TextView) convertView.findViewById(R.id.list_putts);
 			puttsTextView.setText("Putts:" + c.getPutts());
 			
 			return convertView;
 		}
 	}
+
+
+	/** updates the data changed in holeFragment.
+	 * 
+	 */
+	@Override
+	public void onResume() {
+		
+		super.onResume();
+		
+		//refresh the data set in HoleListFragment
+		((HoleAdapter)getListAdapter()).notifyDataSetChanged();
+	}
+	
+	
 	
 }

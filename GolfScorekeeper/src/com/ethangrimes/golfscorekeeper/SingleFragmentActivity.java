@@ -3,18 +3,18 @@
  */
 package com.ethangrimes.golfscorekeeper;
 
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 
 /**
  * @author Ethan
  *
  */
-public abstract class SingleFragmentActivity extends Activity {
+public abstract class SingleFragmentActivity extends FragmentActivity {
 	
-	protected abstract Fragment createFragment();
+	protected abstract android.support.v4.app.Fragment createFragment();
 
 	
 	@Override
@@ -24,7 +24,7 @@ public abstract class SingleFragmentActivity extends Activity {
 		setContentView(R.layout.activity_fragment);
 		
 		//Get the activities fragment manager
-		FragmentManager fm = getFragmentManager();
+		FragmentManager fm = getSupportFragmentManager();
 				
 		//create fragment variable, let fragment manager find fragment view.
 		Fragment fragment = fm.findFragmentById(R.id.fragmentContainer);
