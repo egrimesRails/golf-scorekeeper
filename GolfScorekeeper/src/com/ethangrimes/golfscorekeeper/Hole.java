@@ -3,7 +3,17 @@ package com.ethangrimes.golfscorekeeper;
 import java.util.Date;
 import java.util.UUID;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Hole {
+	
+	//constants for json keys
+	private static final String JSON_ID = "id";
+	private static final String JSON_SCORE = "score";
+	private static final String JSON_PUTTS = "putts";
+	private static final String JSON_HOLE = "holenumber";
+	
 	
 	//member variables for unique holes
 	private UUID mHoleId;
@@ -12,9 +22,16 @@ public class Hole {
 	private String mHoleNumber;
 	private Date mDate;
 	
-	//textView labels
 	
-	
+	/**Constructor for saved hole data*/
+	public Hole(JSONObject json) throws JSONException {
+		
+		mHoleId = UUID.fromString(json.getString(JSON_ID));
+		mScore = json.getInt(JSON_SCORE);
+		mPutts = json.getInt(JSON_PUTTS);
+		mHoleNumber = json.getString(JSON_HOLE);
+		
+	}
 	/**
 	 * Constructor for a hole
 	 */
@@ -86,9 +103,17 @@ public class Hole {
 		mDate = date;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	public JSONObject toJSON() throws JSONException {
+		
+		JSONObject json = new JSONObject();
+		
+		json.put(JSON_ID, mHoleId.toString());
+		json.put(JSON_SCORE, String.valueOf(mScore));
+		json.put(JSON_PUTTS, String.valueOf(mPutts));
+		json.put(JSON_HOLE, mHoleNumber);
+		
+		return json;
+	}
 	@Override
 	public String toString() {
 		return mHoleNumber;

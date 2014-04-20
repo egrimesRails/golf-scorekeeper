@@ -116,6 +116,18 @@ public class HoleFragment extends Fragment {
 		
 		return fragment;
 	}
+
+
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.Fragment#onPause()
+	 */
+	@Override
+	public void onPause() {
+		super.onPause();
+		HoleSingleton.get(getActivity()).saveHoles();
+	}
+	
+	
 	
 	
 

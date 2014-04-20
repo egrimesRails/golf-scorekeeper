@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import android.content.Context;
+import android.util.Log;
 
 /**
  * @author Ethan Grimes
@@ -16,24 +17,47 @@ import android.content.Context;
  */
 public class HoleSingleton {
 	
-	private ArrayList<Hole> mHoles;
-	
-	//static variable
+	private static final String TAG = "HoleSingleton"; 
+	private static final String FILENAME = "holes.json";
 	private static HoleSingleton sHoleSingleton;
-	private Context mAppContext;
 	
+	private Context mAppContext;
+	private ArrayList<Hole> mHoles;
+	private ScorekeeperJSONSerializer mSerializer;
 	
 	//constructor for instance
 	private HoleSingleton(Context appContext) {
 		mAppContext = appContext;
 		mHoles = new ArrayList<Hole>();
+		mSerializer = new ScorekeeperJSONSerializer(mAppContext, FILENAME);
 		
-		//create 18 holes and set hole number
-		for (int i = 1; i < 19; i++) {
-			Hole c = new Hole();
-			c.setHoleNumber(Integer.toString(i));
-			mHoles.add(c);
+		try {
+			mHoles = mSerializer.loadHoles();
+		} catch (Exception e){
+			
+			//create 18 holes if data is not loaded by file
+			for (int i = 1; i < 19; i++) {
+				Hole c = new Hole();
+				c.setHoleNumber(Integer.toString(i));
+				mHoles.add(c);
+				Log.e(TAG, "Error loading holes", e);
+			}
+			
 		}
+		
+		
+	}
+	
+	public boolean saveHoles() {
+		try {
+			mSerializer.saveHoles(mHoles);
+			Log.d(TAG, "holes saved to file");
+			return true;
+		} catch(Exception e) {
+			Log.e(TAG, "Error Saving File", e);
+			return false;
+		}
+		
 	}
 	
 	public static HoleSingleton get(Context c) {
