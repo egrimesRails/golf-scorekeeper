@@ -7,5 +7,6 @@
     <string name="score_label">Score</string>
     <string name="putts_label">Putts</string>
     <string name="holes_list_title">Touch a hole to edit</string>
+    <string name="new_round">reset round</string>
 
 </resources>

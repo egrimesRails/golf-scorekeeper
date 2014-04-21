@@ -3,10 +3,16 @@ package com.ethangrimes.golfscorekeeper;
 import java.util.UUID;
 
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.NavUtils;
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
@@ -18,10 +24,13 @@ public class HoleFragment extends Fragment {
 	
 	public static final String EXTRA_HOLE_ID = "com.ethangrimes.golfscorekeeper.hole_id";
 	
+	
+	
 	private Hole mHole;
 	private NumberPicker mNpScore;
 	private NumberPicker mNpPutts;
 	private TextView mHoleNumber;
+	
 	
 	
 
@@ -38,12 +47,15 @@ public class HoleFragment extends Fragment {
 		UUID holeID = (UUID)getArguments().getSerializable(EXTRA_HOLE_ID);
 		
 		mHole = HoleSingleton.get(getActivity()).getHole(holeID);
+		
+		setHasOptionsMenu(true);
 	}
 
 
 	/**
 	 * onCreateView inflates fragment layout
 	 * */
+	@TargetApi(11)
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent,
 			Bundle savedInstanceState) {
@@ -52,7 +64,12 @@ public class HoleFragment extends Fragment {
 		View v = inflater.inflate(R.layout.fragment_hole, parent, false);
 		
 		
-		
+		//wire the icon as an up button if supported
+		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
+			if(NavUtils.getParentActivityIntent(getActivity()) != null){
+			getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
+			}
+		}
 		//Wire TextView for hole number
 		mHoleNumber = (TextView)v.findViewById(R.id.holeNumber);
 		mHoleNumber.setText(mHole.getHoleNumber());
@@ -125,6 +142,29 @@ public class HoleFragment extends Fragment {
 	public void onPause() {
 		super.onPause();
 		HoleSingleton.get(getActivity()).saveHoles();
+	}
+
+
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.Fragment#onOptionsItemSelected(android.view.MenuItem)
+	 */
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		
+		switch (item.getItemId()){
+		
+		case android.R.id.home:
+			
+			if(NavUtils.getParentActivityIntent(getActivity()) != null){
+				
+				NavUtils.navigateUpFromSameTask(getActivity());
+			}
+			
+			return true;
+			
+		default: return super.onOptionsItemSelected(item);	
+		}
+		
 	}
 	
 	

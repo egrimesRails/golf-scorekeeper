@@ -6,9 +6,14 @@ package com.ethangrimes.golfscorekeeper;
 import java.util.ArrayList;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -32,6 +37,9 @@ public class HoleListFragment extends ListFragment {
 		super.onCreate(savedInstanceState);
 		//set the title in the action bar
 		getActivity().setTitle(R.string.holes_list_title);
+		
+		//let fragment know menu options exist
+		setHasOptionsMenu(true);
 		
 		mHoles = HoleSingleton.get(getActivity()).getHoles();
 		
@@ -70,6 +78,8 @@ public class HoleListFragment extends ListFragment {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			
+			
+			
 			//inflate the custom layout for listview if one does not exist
 			if(convertView == null){
 				convertView = getActivity().getLayoutInflater().inflate(R.layout.list_item_holes, null);
@@ -106,6 +116,69 @@ public class HoleListFragment extends ListFragment {
 		//refresh the data set in HoleListFragment
 		((HoleAdapter)getListAdapter()).notifyDataSetChanged();
 	}
+
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.Fragment#onCreateOptionsMenu(android.view.Menu, android.view.MenuInflater)
+	 */
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		super.onCreateOptionsMenu(menu, inflater);
+		inflater.inflate(R.menu.fragment_hole_list, menu);
+	}
+
+	/**switch for selections of different menu items 
+	 *
+	 */
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		
+		
+		switch(item.getItemId()) {
+		
+		//if selected create dialog and respond to click events
+		case R.id.menu_item_new_hole:
+			
+			AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+			alert.setMessage("Reset Round?");
+			alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+					
+				}
+			});
+			alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					
+					for(int i = 0;i < mHoles.size(); i++) {
+						Hole c = mHoles.get(i);
+						c.setScore(0);
+						c.setPutts(0);
+						
+					}
+					//update the data
+					((HoleAdapter)getListAdapter()).notifyDataSetChanged();
+					
+				}
+			});
+			
+			alert.show();
+			return true;
+			
+		default:
+			return true; //super.onOptionsItemSelected(item);
+		}
+		
+	}
+
+	
+	
+	
+	
+	
 	
 	
 	

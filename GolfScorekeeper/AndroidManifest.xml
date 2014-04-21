@@ -27,7 +27,8 @@
             android:name="com.ethangrimes.golfscorekeeper.HolePagerActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
-            
+         <meta-data android:name="android.support.PARENT_ACTIVITY"
+             android:value=".HoleListActivity"/>   
         </activity>
     </application>
 

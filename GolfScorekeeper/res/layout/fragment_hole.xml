@@ -60,5 +60,7 @@
         android:layout_marginRight="23dp"
         android:layout_toLeftOf="@+id/scorePicker1"
         android:text="@string/score_label" />
+
+    
     
 </RelativeLayout>
