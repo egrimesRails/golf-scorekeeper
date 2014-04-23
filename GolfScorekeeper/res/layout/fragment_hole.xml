@@ -61,6 +61,12 @@
         android:layout_toLeftOf="@+id/scorePicker1"
         android:text="@string/score_label" />
 
-    
+    <TextView
+        android:id="@+id/totals"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="" />
     
 </RelativeLayout>

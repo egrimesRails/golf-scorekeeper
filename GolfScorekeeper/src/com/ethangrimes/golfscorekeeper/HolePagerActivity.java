@@ -12,15 +12,19 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.widget.TextView;
+import android.widget.Toast;
 /**
  * @author Ethan
  *
  */
 public class HolePagerActivity extends FragmentActivity {
-
+	
 	private ViewPager mViewPager;
 	private ArrayList<Hole> mHoles;
-
+	
+	private String mTotals;
 	/** 
 	 * 
 	 */
@@ -44,6 +48,11 @@ public class HolePagerActivity extends FragmentActivity {
 		//get activities instance of fragment manager
 		FragmentManager fm = getSupportFragmentManager();
 		
+		
+		
+		
+		
+		
 		//set adapter as an unnamed instance of FragmentStatePagerAdapter
 		//FragmentStatePagerAdapter manages conversation with ViewPager
 		mViewPager.setAdapter(new FragmentStatePagerAdapter(fm) {
@@ -57,8 +66,36 @@ public class HolePagerActivity extends FragmentActivity {
 			@Override
 			public Fragment getItem(int pos) {
 				Hole hole = mHoles.get(pos);
+				
 				return HoleFragment.newInstance(hole.getId());
 			}
+			
+			
+		});
+		
+		mViewPager.setOnPageChangeListener(new OnPageChangeListener() {
+
+			@Override
+			public void onPageScrollStateChanged(int arg0) {
+				
+				
+				
+			}
+
+			@Override
+			public void onPageScrolled(int arg0, float arg1, int arg2) {
+				
+				
+			}
+
+			@Override
+			public void onPageSelected(int pos) {
+			calculateTotals();	
+				
+			}
+				
+				
+				
 			
 			
 		});
@@ -78,6 +115,26 @@ public class HolePagerActivity extends FragmentActivity {
 		
 	}
 	
-	
+	/**calculate total score and putts entered in so far*/
+	public void calculateTotals() {
+		int totalScore = 0;
+		int totalPutts = 0;
+		for(int i = 0;i < mHoles.size();i++) {
+		
+			totalScore += mHoles.get(i).getScore();
+			totalPutts += mHoles.get(i).getPutts();
+			
+			
+		}
+		for(int i = 0;i < mHoles.size();i++){
+		
+		mHoles.get(i).setTotalPutts(totalPutts);
+		mHoles.get(i).setTotalScore(totalScore);
+		
+		
+		}
+		
+		
+	}
 	
 }

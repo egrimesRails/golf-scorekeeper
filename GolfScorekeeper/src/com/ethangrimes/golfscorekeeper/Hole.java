@@ -21,6 +21,8 @@ public class Hole {
 	private int mPutts;
 	private String mHoleNumber;
 	private Date mDate;
+	private int mTotalScore;
+	private int mTotalPutts;
 	
 	
 	/**Constructor for saved hole data*/
@@ -39,7 +41,30 @@ public class Hole {
 		//generate unique id
 		mHoleId = UUID.randomUUID();
 	}
-
+	
+	/**setter for total putts*/
+	public void setTotalPutts(int totalPutts) {
+		mTotalPutts = totalPutts;
+	}
+	
+	/**getter for total putts*/
+	public int getTotalPutts() {
+		return mTotalPutts;
+	}
+	
+	/**method allows setting of a total score*/
+	public void setTotalScore(int totalScore) {
+		
+		mTotalScore = totalScore;
+	}
+	
+	/**method calculates the total score by looping through array
+	 * of holes*/
+	public int getTotalScore() {
+		
+		return mTotalScore;
+	}
+	
 	/**
 	 * @return the score
 	 */

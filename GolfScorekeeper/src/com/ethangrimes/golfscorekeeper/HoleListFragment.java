@@ -157,6 +157,8 @@ public class HoleListFragment extends ListFragment {
 						Hole c = mHoles.get(i);
 						c.setScore(0);
 						c.setPutts(0);
+						c.setTotalScore(0);
+						c.setTotalPutts(0);
 						
 					}
 					//update the data
@@ -169,7 +171,7 @@ public class HoleListFragment extends ListFragment {
 			return true;
 			
 		default:
-			return true; //super.onOptionsItemSelected(item);
+			return super.onOptionsItemSelected(item);
 		}
 		
 	}

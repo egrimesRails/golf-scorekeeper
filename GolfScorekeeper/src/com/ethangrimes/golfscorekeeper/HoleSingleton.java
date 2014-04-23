@@ -80,6 +80,26 @@ public class HoleSingleton {
 		}
 		return null;
 	}
+	/**calculate total score and putts entered in so far*/
+	public void calculateTotals() {
+		int totalScore = 0;
+		int totalPutts = 0;
+		for(int i = 0;i < mHoles.size();i++) {
+		
+			totalScore += mHoles.get(i).getScore();
+			totalPutts += mHoles.get(i).getPutts();
+			
+			
+		}
+		for(int i = 0;i < mHoles.size();i++){
+		
+		mHoles.get(i).setTotalPutts(totalPutts);
+		mHoles.get(i).setTotalScore(totalScore);
+		
+		}
+		
+		
+	}
 	
 }
 	

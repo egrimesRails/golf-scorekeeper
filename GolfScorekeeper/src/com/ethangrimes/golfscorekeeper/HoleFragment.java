@@ -3,7 +3,6 @@ package com.ethangrimes.golfscorekeeper;
 import java.util.UUID;
 
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
 import android.os.Build;
@@ -12,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
@@ -30,6 +28,7 @@ public class HoleFragment extends Fragment {
 	private NumberPicker mNpScore;
 	private NumberPicker mNpPutts;
 	private TextView mHoleNumber;
+	private TextView mTotals;
 	
 	
 	
@@ -63,6 +62,9 @@ public class HoleFragment extends Fragment {
 		//inflate the proper view
 		View v = inflater.inflate(R.layout.fragment_hole, parent, false);
 		
+		//calculate any totals that may exist on startup
+		HoleSingleton.get(getActivity()).calculateTotals();
+		
 		
 		//wire the icon as an up button if supported
 		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
@@ -86,8 +88,10 @@ public class HoleFragment extends Fragment {
 			
 			@Override
 			public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-				//Toast.makeText(getActivity(), "Score is: " + Integer.toString(newVal), Toast.LENGTH_SHORT).show();
+				
 				mHole.setScore(mNpScore.getValue());
+				HoleSingleton.get(getActivity()).calculateTotals();
+				mTotals.setText("Score: " + mHole.getTotalScore() + " Putts: " + mHole.getTotalPutts());
 			}
 		});
 		
@@ -105,12 +109,16 @@ public class HoleFragment extends Fragment {
 					
 					@Override
 					public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-						//Toast.makeText(getActivity(), "Putts: " + Integer.toString(newVal), Toast.LENGTH_SHORT).show();
+						
 						 mHole.setPutts(mNpPutts.getValue());
+						 HoleSingleton.get(getActivity()).calculateTotals();
+						 mTotals.setText("Score: " + mHole.getTotalScore() + " Putts: " + mHole.getTotalPutts());
 					}
 				});
 		
-		
+		//wire totals calculation
+		mTotals = (TextView)v.findViewById(R.id.totals);
+		mTotals.setText("Score: " + mHole.getTotalScore() + " Putts: " + mHole.getTotalPutts());
 		
 		return v;
 	}
@@ -142,11 +150,12 @@ public class HoleFragment extends Fragment {
 	public void onPause() {
 		super.onPause();
 		HoleSingleton.get(getActivity()).saveHoles();
+		HoleSingleton.get(getActivity()).calculateTotals();
 	}
 
 
-	/* (non-Javadoc)
-	 * @see android.support.v4.app.Fragment#onOptionsItemSelected(android.view.MenuItem)
+	/** 
+	 *Makes icon return to parent activity.
 	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -166,6 +175,11 @@ public class HoleFragment extends Fragment {
 		}
 		
 	}
+
+
+	
+	
+	
 	
 	
 	

@@ -30,18 +30,19 @@ public final class R {
         public static final int fragmentContainer=0x7f050001;
         public static final int holeLabel=0x7f050004;
         public static final int holeNumber=0x7f050003;
-        public static final int list_hole=0x7f05000d;
-        public static final int list_putts=0x7f05000e;
-        public static final int list_score=0x7f05000c;
-        public static final int lv=0x7f050009;
-        public static final int menu_item_new_hole=0x7f05000f;
-        public static final int menu_item_new_round=0x7f050010;
+        public static final int list_hole=0x7f05000e;
+        public static final int list_putts=0x7f05000f;
+        public static final int list_score=0x7f05000d;
+        public static final int lv=0x7f05000a;
+        public static final int menu_item_new_hole=0x7f050010;
+        public static final int menu_item_new_round=0x7f050011;
         public static final int puttsLabel=0x7f050008;
         public static final int puttsPicker=0x7f050007;
         public static final int scoreLabel=0x7f050005;
         public static final int scorePicker1=0x7f050006;
-        public static final int textView1=0x7f05000a;
-        public static final int tv1=0x7f05000b;
+        public static final int textView1=0x7f05000b;
+        public static final int totals=0x7f050009;
+        public static final int tv1=0x7f05000c;
         public static final int viewPager=0x7f050000;
     }
     public static final class layout {
