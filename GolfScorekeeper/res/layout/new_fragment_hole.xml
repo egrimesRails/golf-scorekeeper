@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout01"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <TextView
+        android:id="@+id/holeNumber"
+        style="@style/scoreBoardHeaderText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/one"
+        android:textSize="50sp" />
+
+    <TextView
+        android:id="@+id/scoreLabel"
+        style="@style/scoreBoardText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/scoreDown"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="14dp"
+        android:text="@string/score_label"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/scoreUp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/minus_sign"
+        android:textSize="35sp" />
+
+    <Button
+        android:id="@+id/scoreDown"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/score"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/buttonscoredown"
+        
+        android:text="@string/minus_sign"
+        android:textColor="#03020F"
+        android:textSize="35sp" />
+
+    <TextView
+        android:id="@+id/putts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/puttsUp"
+        android:text="@string/minus_sign"
+        android:textSize="35sp" />
+
+    <Button
+        android:id="@+id/puttsDown"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/putts"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/puttsbuttons"
+        
+        android:text="@string/minus_sign"
+        android:textColor="#03020F"
+        android:textSize="35sp" />
+
+    <Button
+        android:id="@+id/puttsUp"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/scoreDown"
+        android:layout_marginTop="36dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/puttsbuttons"
+        
+        android:text="@string/plus_sign"
+        android:textColor="#03020F"
+        android:textSize="35sp" />
+
+    <Button
+        android:id="@+id/scoreUp"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/holeNumber"
+        android:layout_marginTop="14dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/buttonshape"
+        
+        android:text="@string/plus_sign"
+        android:textColor="#03020F"
+        android:textSize="35sp" />
+
+    <TextView
+        android:id="@+id/puttsLabel"
+        style="@style/scoreBoardText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/puttsDown"
+        android:layout_marginBottom="14dp"
+        android:layout_alignParentLeft="true"
+        android:text="@string/putts_label"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/totals"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/scoreBoardText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="total"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tvPuttsTotals"
+        style="@style/scoreBoardText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="TextView"
+        android:textSize="20sp" />
+
+</RelativeLayout>

@@ -22,8 +22,18 @@ public final class R {
         public static final int activity_vertical_margin=0x7f040001;
     }
     public static final class drawable {
-        public static final int golficon=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
+        public static final int button_normal=0x7f020000;
+        public static final int button_pressed=0x7f020001;
+        public static final int button_shape=0x7f020002;
+        public static final int button_text_color=0x7f020003;
+        public static final int buttonscoredown=0x7f020004;
+        public static final int buttonshape=0x7f020005;
+        public static final int golficon=0x7f020006;
+        public static final int ic_launcher=0x7f020007;
+        public static final int putts_up_button_normal=0x7f020008;
+        public static final int putts_up_button_pressed=0x7f020009;
+        public static final int puttsbuttons=0x7f02000a;
+        public static final int remote_background=0x7f02000b;
     }
     public static final class id {
         public static final int RelativeLayout01=0x7f050002;
@@ -34,15 +44,22 @@ public final class R {
         public static final int list_putts=0x7f05000f;
         public static final int list_score=0x7f05000d;
         public static final int lv=0x7f05000a;
-        public static final int menu_item_new_hole=0x7f050010;
-        public static final int menu_item_new_round=0x7f050011;
+        public static final int menu_item_new_hole=0x7f050017;
+        public static final int menu_item_new_round=0x7f050018;
+        public static final int putts=0x7f050013;
+        public static final int puttsDown=0x7f050015;
         public static final int puttsLabel=0x7f050008;
         public static final int puttsPicker=0x7f050007;
+        public static final int puttsUp=0x7f050014;
+        public static final int score=0x7f050011;
+        public static final int scoreDown=0x7f050010;
         public static final int scoreLabel=0x7f050005;
         public static final int scorePicker1=0x7f050006;
+        public static final int scoreUp=0x7f050012;
         public static final int textView1=0x7f05000b;
         public static final int totals=0x7f050009;
         public static final int tv1=0x7f05000c;
+        public static final int tvPuttsTotals=0x7f050016;
         public static final int viewPager=0x7f050000;
     }
     public static final class layout {
@@ -50,6 +67,7 @@ public final class R {
         public static final int fragment_hole=0x7f030001;
         public static final int hole_list_view_header=0x7f030002;
         public static final int list_item_holes=0x7f030003;
+        public static final int new_fragment_hole=0x7f030004;
     }
     public static final class menu {
         public static final int fragment_hole_list=0x7f080000;
@@ -60,7 +78,10 @@ public final class R {
         public static final int app_name=0x7f060000;
         public static final int hole_number_label=0x7f060002;
         public static final int holes_list_title=0x7f060005;
+        public static final int minus_sign=0x7f060008;
         public static final int new_round=0x7f060006;
+        public static final int one=0x7f060009;
+        public static final int plus_sign=0x7f060007;
         public static final int putts_label=0x7f060004;
         public static final int score_label=0x7f060003;
     }
@@ -91,7 +112,8 @@ public final class R {
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f070001;
-        public static final int scoreBoardHeaderText=0x7f070003;
-        public static final int scoreBoardText=0x7f070002;
+        public static final int RemoteButton=0x7f070002;
+        public static final int scoreBoardHeaderText=0x7f070004;
+        public static final int scoreBoardText=0x7f070003;
     }
 }

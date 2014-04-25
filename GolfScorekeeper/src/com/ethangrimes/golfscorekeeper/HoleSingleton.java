@@ -98,7 +98,7 @@ public class HoleSingleton {
 		
 		}
 		
-		
+		Log.d(TAG, "calculateTotals called");
 	}
 	
 }

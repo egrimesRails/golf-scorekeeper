@@ -1,5 +1,6 @@
 package com.ethangrimes.golfscorekeeper;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 import android.support.v4.app.Fragment;
@@ -10,30 +11,33 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.NumberPicker;
+import android.widget.Button;
 import android.widget.TextView;
 
 
 /**Controller which interacts with model
  * and views to allow score entry
  * */
-public class HoleFragment extends Fragment {
-	
+public class HoleFragment extends Fragment  {
+	private static final String TAG = "HoleFragment";
 	public static final String EXTRA_HOLE_ID = "com.ethangrimes.golfscorekeeper.hole_id";
 	
-	
-	
 	private Hole mHole;
-	private NumberPicker mNpScore;
-	private NumberPicker mNpPutts;
 	private TextView mHoleNumber;
 	private TextView mTotals;
-	
-	
-	
-
-	
+	private TextView mPuttsTotals;
+	private Button mScoreUp;
+	private Button mScoreDown;
+	private Button mPuttsUp;
+	private Button mPuttsDown;
+	private TextView mScore;
+	private TextView mPutts;
+	private int mScoreNumber;
+	private int mPuttsNumber;
+	private int mPos;
+	private ArrayList<Hole> mHoles;
 	/**
 	 * fragment onCreate makes a new hole instance.
 	 * 
@@ -48,6 +52,10 @@ public class HoleFragment extends Fragment {
 		mHole = HoleSingleton.get(getActivity()).getHole(holeID);
 		
 		setHasOptionsMenu(true);
+		
+		mHoles = HoleSingleton.get(getActivity()).getHoles();
+		
+		mPos = mHoles.indexOf(mHole);
 	}
 
 
@@ -60,7 +68,7 @@ public class HoleFragment extends Fragment {
 			Bundle savedInstanceState) {
 		
 		//inflate the proper view
-		View v = inflater.inflate(R.layout.fragment_hole, parent, false);
+		View v = inflater.inflate(R.layout.new_fragment_hole, parent, false);
 		
 		//calculate any totals that may exist on startup
 		HoleSingleton.get(getActivity()).calculateTotals();
@@ -72,54 +80,156 @@ public class HoleFragment extends Fragment {
 			getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
 			}
 		}
+//------BEGIN WIRING OF HOLEFRAGMENT WIDGETS---------------------------------------------
+		//set scoring variable to a default value
+		mScoreNumber = 3;
+		mPuttsNumber = 1;
+		
 		//Wire TextView for hole number
 		mHoleNumber = (TextView)v.findViewById(R.id.holeNumber);
 		mHoleNumber.setText(mHole.getHoleNumber());
 		
-		//Wire score NumberPicker
-		mNpScore = (NumberPicker)v.findViewById(R.id.scorePicker1);
+		//Wire score TextView and set to "-" if score has not been entered
+		mScore = (TextView)v.findViewById(R.id.score);
+		if(mHole.getScore() == 0){
+			mScore.setText("-");
+		}else{
+			mScore.setText(Integer.toString(mHole.getScore()));
+		}
 		
-		mNpScore.setMinValue(1);
-		mNpScore.setMaxValue(12);
-		mNpScore.setValue(4);
+		//Wire scoring up button and change TextView on click
+		mScoreUp = (Button)v.findViewById(R.id.scoreUp);
 		
-		//listener does actions when score value changes
-		mNpScore.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-			
+		mScoreUp.setOnClickListener(new OnClickListener(){
+
 			@Override
-			public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+			public void onClick(View v) {
 				
-				mHole.setScore(mNpScore.getValue());
+				if(mScoreNumber <= 11) {
+					mScoreNumber++;
+					mHole.setScore(mScoreNumber);
+					mScore.setText(Integer.toString(mHole.getScore()));
+				}else if(mHole.getScore() == 0){
+					mScoreNumber = 3;
+					mHole.setScore(mScoreNumber);
+					mScore.setText(Integer.toString(mHole.getScore()));
+				} else {
+					mScoreNumber = -1;
+					mScoreNumber++;
+					mHole.setScore(mScoreNumber);
+					mScore.setText("-");
+				}
 				HoleSingleton.get(getActivity()).calculateTotals();
-				mTotals.setText("Score: " + mHole.getTotalScore() + " Putts: " + mHole.getTotalPutts());
+				mTotals.setText("Score: " + mHole.getTotalScore());
+				mPuttsTotals.setText(mHole.getTotalPutts() + " Putts");
 			}
 		});
 		
+		//Wire scoring down button and change TextView onClick
+		mScoreDown = (Button)v.findViewById(R.id.scoreDown);
 		
+		mScoreDown.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				if(mHole.getScore() > 1) {
+					mScoreNumber = mHole.getScore();
+					mScoreNumber--;
+					mHole.setScore(mScoreNumber);
+					mScore.setText(Integer.toString(mHole.getScore()));
+				}else if(mHole.getScore() == 1) {
+					mScoreNumber = 0;
+					mHole.setScore(mScoreNumber);
+					mScore.setText("-");
+				} else {
+					mScoreNumber = 5;
+					mScoreNumber--;
+					mHole.setScore(mScoreNumber);
+					mScore.setText(Integer.toString(mHole.getScore()));
+				}
+				HoleSingleton.get(getActivity()).calculateTotals();
+				mTotals.setText("Score: " + mHole.getTotalScore());
+				mPuttsTotals.setText(mHole.getTotalPutts() + " Putts");
+			}
+		});
 		
-		//Wire putts NumberPicker
-		mNpPutts = (NumberPicker)v.findViewById(R.id.puttsPicker);
-		mNpPutts.setMinValue(0);
-		mNpPutts.setMaxValue(8);
-		mNpPutts.setValue(2);
-		
-		
-		//listener does actions when score value changes
-				mNpPutts.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+		//Wire putt score up button and putts textView
+		mPuttsUp = (Button)v.findViewById(R.id.puttsUp);
+		mPutts = (TextView)v.findViewById(R.id.putts);
+		if(mHole.getPutts() == 0){
+			mPutts.setText("-");
+		}else{
+			mPutts.setText(Integer.toString(mHole.getPutts()));
+		}
+		mPuttsUp.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				
+				if(mHole.getPutts() <= 6) {
+					mPuttsNumber++;
+					mHole.setPutts(mPuttsNumber);
+					mPutts.setText(Integer.toString(mHole.getPutts()));
 					
-					@Override
-					public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-						
-						 mHole.setPutts(mNpPutts.getValue());
-						 HoleSingleton.get(getActivity()).calculateTotals();
-						 mTotals.setText("Score: " + mHole.getTotalScore() + " Putts: " + mHole.getTotalPutts());
-					}
-				});
+				}else if(mHole.getPutts() == 0){
+					mPuttsNumber = 1;
+					mHole.setPutts(mPuttsNumber);
+					mPutts.setText(Integer.toString(mHole.getPutts()));
+				
+				}else{
+					mPuttsNumber = -1;
+					mPuttsNumber++;
+					mHole.setPutts(mPuttsNumber);
+					mPutts.setText("-");
+				}
+				HoleSingleton.get(getActivity()).calculateTotals();
+				mTotals.setText("Score: " + mHole.getTotalScore());
+				mPuttsTotals.setText(mHole.getTotalPutts() + " Putts");
+			}
+		});
 		
-		//wire totals calculation
+		//wire putts score down button
+		mPuttsDown = (Button)v.findViewById(R.id.puttsDown);
+		mPuttsDown.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				
+				if(mHole.getPutts() > 1){
+					mPuttsNumber = mHole.getPutts();
+					mPuttsNumber--;
+					mHole.setPutts(mPuttsNumber);
+					mPutts.setText(Integer.toString(mHole.getPutts()));
+					
+				}else if(mHole.getPutts() == 1) {
+					mPuttsNumber = 0;
+					mHole.setPutts(mPuttsNumber);
+					mPutts.setText("-");
+				}else {
+					mPuttsNumber = 3;
+					mPuttsNumber--;
+					mHole.setPutts(mPuttsNumber);
+					mPutts.setText(Integer.toString(mHole.getPutts()));
+				}
+				HoleSingleton.get(getActivity()).calculateTotals();
+				mTotals.setText("Score: " + mHole.getTotalScore());
+				mPuttsTotals.setText(mHole.getTotalPutts() + " Putts");
+				
+			}
+			
+			
+		});
+		
+		
+		//wire total putts 
+		mPuttsTotals = (TextView)v.findViewById(R.id.tvPuttsTotals);
+		
+		//wire total score calculation
 		mTotals = (TextView)v.findViewById(R.id.totals);
-		mTotals.setText("Score: " + mHole.getTotalScore() + " Putts: " + mHole.getTotalPutts());
-		
+		HoleSingleton.get(getActivity()).calculateTotals();
+		mTotals.setText("Score: " + mHole.getTotalScore());
+		mPuttsTotals.setText(mHole.getTotalPutts() + " Putts");
+//--------------END OF WIRING WIDGETS--------------------------------------------------------------------		
 		return v;
 	}
 	
@@ -139,6 +249,7 @@ public class HoleFragment extends Fragment {
 		//attach arguments to the fragment
 		fragment.setArguments(args);
 		
+		
 		return fragment;
 	}
 
@@ -152,6 +263,8 @@ public class HoleFragment extends Fragment {
 		HoleSingleton.get(getActivity()).saveHoles();
 		HoleSingleton.get(getActivity()).calculateTotals();
 	}
+	
+	
 
 
 	/** 
@@ -177,6 +290,39 @@ public class HoleFragment extends Fragment {
 	}
 
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.Fragment#onResume()
+	 */
+	@Override
+	public void onResume() {
+		
+		super.onResume();
+		HoleSingleton.get(getActivity()).calculateTotals();
+		mTotals.setText("Score: " + Integer.toString(mHole.getTotalScore()));
+		mPuttsTotals.setText(mHole.getTotalPutts() + " Putts");
+	}
+	
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.Fragment#onHiddenChanged(boolean)
+	 */
+	@Override
+	public void onHiddenChanged(boolean hidden) {
+		super.onHiddenChanged(hidden);
+		
+		if (hidden) {
+			
+			HoleSingleton.get(getActivity()).calculateTotals();
+			mTotals.setText("Score: " + Integer.toString(mHole.getTotalScore()));
+			mPuttsTotals.setText(mHole.getTotalPutts() + " Putts");
+		}	
+	}
+	
+}
+
+
+	
+
+
 	
 	
 	
@@ -185,4 +331,4 @@ public class HoleFragment extends Fragment {
 	
 	
 
-}
+

@@ -8,5 +8,7 @@
     <string name="putts_label">Putts</string>
     <string name="holes_list_title">Touch a hole to edit</string>
     <string name="new_round">reset round</string>
-
+	<string name="plus_sign">+</string>
+	<string name="minus_sign">-</string>
+	<string name="one">1</string>
 </resources>

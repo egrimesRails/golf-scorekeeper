@@ -11,20 +11,21 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.Log;
+import android.widget.Adapter;
 import android.widget.TextView;
-import android.widget.Toast;
 /**
  * @author Ethan
  *
  */
 public class HolePagerActivity extends FragmentActivity {
-	
+	private static final String TAG = "HolePagerActivity";
 	private ViewPager mViewPager;
 	private ArrayList<Hole> mHoles;
 	
-	private String mTotals;
 	/** 
 	 * 
 	 */
@@ -48,13 +49,7 @@ public class HolePagerActivity extends FragmentActivity {
 		//get activities instance of fragment manager
 		FragmentManager fm = getSupportFragmentManager();
 		
-		
-		
-		
-		
-		
-		//set adapter as an unnamed instance of FragmentStatePagerAdapter
-		//FragmentStatePagerAdapter manages conversation with ViewPager
+		//set adapter for view pager
 		mViewPager.setAdapter(new FragmentStatePagerAdapter(fm) {
 
 			@Override
@@ -69,38 +64,40 @@ public class HolePagerActivity extends FragmentActivity {
 				
 				return HoleFragment.newInstance(hole.getId());
 			}
-			
-			
+
+			/* (non-Javadoc)
+			 * @see android.support.v4.view.PagerAdapter#getItemPosition(java.lang.Object)
+			 */
+			@Override
+			public int getItemPosition(Object object) {
+				
+					return POSITION_NONE;
+				}
 		});
 		
+		
+		
+		/**Listener for page state changes*/
 		mViewPager.setOnPageChangeListener(new OnPageChangeListener() {
 
 			@Override
 			public void onPageScrollStateChanged(int arg0) {
-				
-				
 				
 			}
 
 			@Override
 			public void onPageScrolled(int arg0, float arg1, int arg2) {
 				
-				
 			}
 
 			@Override
 			public void onPageSelected(int pos) {
-			calculateTotals();	
 				
+				mViewPager.getAdapter().notifyDataSetChanged();
 			}
-				
-				
-				
-			
-			
 		});
 		
-		//set up listview so proper hole is brought up on touch
+		//set up list view so proper hole is brought up on touch
 		UUID holeId = (UUID)getIntent().getSerializableExtra(HoleFragment.EXTRA_HOLE_ID);
 		
 		for(int i = 0; i < mHoles.size(); i++){
@@ -112,8 +109,7 @@ public class HolePagerActivity extends FragmentActivity {
 				break;
 			}
 		}
-		
-	}
+	}//END OF onCREATE
 	
 	/**calculate total score and putts entered in so far*/
 	public void calculateTotals() {
@@ -133,8 +129,6 @@ public class HolePagerActivity extends FragmentActivity {
 		
 		
 		}
-		
-		
 	}
-	
+
 }
