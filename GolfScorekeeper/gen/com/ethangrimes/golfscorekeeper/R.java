@@ -12,11 +12,6 @@ public final class R {
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
-
-         Example customization of dimensions originally defined in res/values/dimens.xml
-         (such as screen margins) for screens with more than 820dp of available width. This
-         would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively).
-    
          */
         public static final int activity_horizontal_margin=0x7f040000;
         public static final int activity_vertical_margin=0x7f040001;
@@ -36,38 +31,32 @@ public final class R {
         public static final int remote_background=0x7f02000b;
     }
     public static final class id {
-        public static final int RelativeLayout01=0x7f050002;
+        public static final int detailFragmentContainer=0x7f050002;
         public static final int fragmentContainer=0x7f050001;
-        public static final int holeLabel=0x7f050004;
-        public static final int holeNumber=0x7f050003;
-        public static final int list_hole=0x7f05000e;
-        public static final int list_putts=0x7f05000f;
-        public static final int list_score=0x7f05000d;
-        public static final int lv=0x7f05000a;
-        public static final int menu_item_new_hole=0x7f050017;
-        public static final int menu_item_new_round=0x7f050018;
-        public static final int putts=0x7f050013;
-        public static final int puttsDown=0x7f050015;
-        public static final int puttsLabel=0x7f050008;
-        public static final int puttsPicker=0x7f050007;
-        public static final int puttsUp=0x7f050014;
-        public static final int score=0x7f050011;
-        public static final int scoreDown=0x7f050010;
-        public static final int scoreLabel=0x7f050005;
-        public static final int scorePicker1=0x7f050006;
-        public static final int scoreUp=0x7f050012;
-        public static final int textView1=0x7f05000b;
-        public static final int totals=0x7f050009;
-        public static final int tv1=0x7f05000c;
-        public static final int tvPuttsTotals=0x7f050016;
+        public static final int holeNumber=0x7f050006;
+        public static final int list_hole=0x7f050004;
+        public static final int list_putts=0x7f050005;
+        public static final int list_score=0x7f050003;
+        public static final int menu_item_new_hole=0x7f050011;
+        public static final int menu_item_new_round=0x7f050012;
+        public static final int putts=0x7f05000b;
+        public static final int puttsDown=0x7f05000d;
+        public static final int puttsLabel=0x7f05000e;
+        public static final int puttsUp=0x7f05000c;
+        public static final int score=0x7f050009;
+        public static final int scoreDown=0x7f050008;
+        public static final int scoreLabel=0x7f050007;
+        public static final int scoreUp=0x7f05000a;
+        public static final int totals=0x7f050010;
+        public static final int tvPuttsTotals=0x7f05000f;
         public static final int viewPager=0x7f050000;
     }
     public static final class layout {
         public static final int activity_fragment=0x7f030000;
-        public static final int fragment_hole=0x7f030001;
-        public static final int hole_list_view_header=0x7f030002;
-        public static final int list_item_holes=0x7f030003;
-        public static final int new_fragment_hole=0x7f030004;
+        public static final int activity_masterdetail=0x7f030004;
+        public static final int activity_twopane=0x7f030001;
+        public static final int list_item_holes=0x7f030002;
+        public static final int new_fragment_hole=0x7f030003;
     }
     public static final class menu {
         public static final int fragment_hole_list=0x7f080000;
@@ -83,7 +72,9 @@ public final class R {
         public static final int one=0x7f060009;
         public static final int plus_sign=0x7f060007;
         public static final int putts_label=0x7f060004;
+        public static final int putts_total=0x7f06000b;
         public static final int score_label=0x7f060003;
+        public static final int score_total=0x7f06000a;
     }
     public static final class style {
         /** 

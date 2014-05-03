@@ -14,14 +14,19 @@ import android.support.v4.app.FragmentManager;
  */
 public abstract class SingleFragmentActivity extends FragmentActivity {
 	
-	protected abstract android.support.v4.app.Fragment createFragment();
+	protected abstract Fragment createFragment();
+	
+	protected int getLayoutResId() {
+		
+		return R.layout.activity_fragment;
+	}
 
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_fragment);
+		setContentView(getLayoutResId());
 		
 		//Get the activities fragment manager
 		FragmentManager fm = getSupportFragmentManager();

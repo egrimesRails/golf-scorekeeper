@@ -6,6 +6,9 @@ import java.util.UUID;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
+import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -36,10 +39,21 @@ public class HoleFragment extends Fragment  {
 	private TextView mPutts;
 	private int mScoreNumber;
 	private int mPuttsNumber;
-	private int mPos;
-	private ArrayList<Hole> mHoles;
+	private Typeface font;
+	private TextView tvScoreLabel;
+	private TextView tvPuttsLabel;
+	private Callbacks mCallbacks;
+	
+	/**Required for hosting activities*/
+	public interface Callbacks {
+		
+		void onHoleUpdated(Hole hole);
+	}
+	
+	
+	
 	/**
-	 * fragment onCreate makes a new hole instance.
+	 * fragment onCreate makes a new hole fragment.
 	 * 
 	 */
 	@Override
@@ -53,9 +67,6 @@ public class HoleFragment extends Fragment  {
 		
 		setHasOptionsMenu(true);
 		
-		mHoles = HoleSingleton.get(getActivity()).getHoles();
-		
-		mPos = mHoles.indexOf(mHole);
 	}
 
 
@@ -73,21 +84,40 @@ public class HoleFragment extends Fragment  {
 		//calculate any totals that may exist on startup
 		HoleSingleton.get(getActivity()).calculateTotals();
 		
-		
 		//wire the icon as an up button if supported
 		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
 			if(NavUtils.getParentActivityIntent(getActivity()) != null){
 			getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
 			}
 		}
+		
+		
 //------BEGIN WIRING OF HOLEFRAGMENT WIDGETS---------------------------------------------
+		
 		//set scoring variable to a default value
 		mScoreNumber = 3;
 		mPuttsNumber = 1;
 		
 		//Wire TextView for hole number
 		mHoleNumber = (TextView)v.findViewById(R.id.holeNumber);
+		font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/bernhc.ttf");
+		mHoleNumber.setTypeface(font);
 		mHoleNumber.setText(mHole.getHoleNumber());
+		
+		//change color if hole has been played
+		if(mHole.getScore() > 0) {
+			
+			mHoleNumber.setTextColor(Color.GREEN);
+		} else {
+			mHoleNumber.setTextColor(Color.WHITE);
+		}
+		
+		//setting typeface for labels
+		tvScoreLabel = (TextView)v.findViewById(R.id.scoreLabel);
+		tvScoreLabel.setTypeface(font);
+		tvPuttsLabel = (TextView)v.findViewById(R.id.puttsLabel);
+		tvPuttsLabel.setTypeface(font);
+		
 		
 		//Wire score TextView and set to "-" if score has not been entered
 		mScore = (TextView)v.findViewById(R.id.score);
@@ -120,8 +150,9 @@ public class HoleFragment extends Fragment  {
 					mScore.setText("-");
 				}
 				HoleSingleton.get(getActivity()).calculateTotals();
-				mTotals.setText("Score: " + mHole.getTotalScore());
-				mPuttsTotals.setText(mHole.getTotalPutts() + " Putts");
+				mCallbacks.onHoleUpdated(mHole);
+				mTotals.setText(Integer.toString(mHole.getTotalScore()));
+				mPuttsTotals.setText(Integer.toString(mHole.getTotalPutts()));
 			}
 		});
 		
@@ -148,8 +179,9 @@ public class HoleFragment extends Fragment  {
 					mScore.setText(Integer.toString(mHole.getScore()));
 				}
 				HoleSingleton.get(getActivity()).calculateTotals();
-				mTotals.setText("Score: " + mHole.getTotalScore());
-				mPuttsTotals.setText(mHole.getTotalPutts() + " Putts");
+				mCallbacks.onHoleUpdated(mHole);
+				mTotals.setText(Integer.toString(mHole.getTotalScore()));
+				mPuttsTotals.setText(Integer.toString(mHole.getTotalPutts()));
 			}
 		});
 		
@@ -183,8 +215,9 @@ public class HoleFragment extends Fragment  {
 					mPutts.setText("-");
 				}
 				HoleSingleton.get(getActivity()).calculateTotals();
-				mTotals.setText("Score: " + mHole.getTotalScore());
-				mPuttsTotals.setText(mHole.getTotalPutts() + " Putts");
+				mCallbacks.onHoleUpdated(mHole);
+				mTotals.setText(Integer.toString(mHole.getTotalScore()));
+				mPuttsTotals.setText(Integer.toString(mHole.getTotalPutts()));
 			}
 		});
 		
@@ -212,8 +245,9 @@ public class HoleFragment extends Fragment  {
 					mPutts.setText(Integer.toString(mHole.getPutts()));
 				}
 				HoleSingleton.get(getActivity()).calculateTotals();
-				mTotals.setText("Score: " + mHole.getTotalScore());
-				mPuttsTotals.setText(mHole.getTotalPutts() + " Putts");
+				mCallbacks.onHoleUpdated(mHole);
+				mTotals.setText(Integer.toString(mHole.getTotalScore()));
+				mPuttsTotals.setText(Integer.toString(mHole.getTotalPutts()));
 				
 			}
 			
@@ -227,8 +261,8 @@ public class HoleFragment extends Fragment  {
 		//wire total score calculation
 		mTotals = (TextView)v.findViewById(R.id.totals);
 		HoleSingleton.get(getActivity()).calculateTotals();
-		mTotals.setText("Score: " + mHole.getTotalScore());
-		mPuttsTotals.setText(mHole.getTotalPutts() + " Putts");
+		mTotals.setText(Integer.toString(mHole.getTotalScore()));
+		mPuttsTotals.setText(Integer.toString(mHole.getTotalPutts()));
 //--------------END OF WIRING WIDGETS--------------------------------------------------------------------		
 		return v;
 	}
@@ -262,6 +296,8 @@ public class HoleFragment extends Fragment  {
 		super.onPause();
 		HoleSingleton.get(getActivity()).saveHoles();
 		HoleSingleton.get(getActivity()).calculateTotals();
+		mTotals.setText(Integer.toString(mHole.getTotalScore()));
+		mPuttsTotals.setText(Integer.toString(mHole.getTotalPutts()));
 	}
 	
 	
@@ -298,8 +334,8 @@ public class HoleFragment extends Fragment  {
 		
 		super.onResume();
 		HoleSingleton.get(getActivity()).calculateTotals();
-		mTotals.setText("Score: " + Integer.toString(mHole.getTotalScore()));
-		mPuttsTotals.setText(mHole.getTotalPutts() + " Putts");
+		mTotals.setText(Integer.toString(mHole.getTotalScore()));
+		mPuttsTotals.setText(Integer.toString(mHole.getTotalPutts()));
 	}
 	
 	/* (non-Javadoc)
@@ -312,9 +348,32 @@ public class HoleFragment extends Fragment  {
 		if (hidden) {
 			
 			HoleSingleton.get(getActivity()).calculateTotals();
-			mTotals.setText("Score: " + Integer.toString(mHole.getTotalScore()));
-			mPuttsTotals.setText(mHole.getTotalPutts() + " Putts");
+			mTotals.setText(Integer.toString(mHole.getTotalScore()));
+			mPuttsTotals.setText(Integer.toString(mHole.getTotalPutts()));
 		}	
+	}
+
+
+	/** get access to hosting activity when fragments attached
+	 * 
+	 */
+	@Override
+	public void onAttach(Activity activity) {
+
+		super.onAttach(activity);
+		mCallbacks = (Callbacks)activity;
+	}
+
+
+	/**
+	 * reset callbacks to null when fragment is detached
+	 */
+	@Override
+	public void onDetach() {
+		
+		super.onDetach();
+		mCallbacks = null;
+		
 	}
 	
 }

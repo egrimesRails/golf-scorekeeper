@@ -21,7 +21,7 @@ import android.widget.TextView;
  * @author Ethan
  *
  */
-public class HolePagerActivity extends FragmentActivity {
+public class HolePagerActivity extends FragmentActivity implements HoleFragment.Callbacks {
 	private static final String TAG = "HolePagerActivity";
 	private ViewPager mViewPager;
 	private ArrayList<Hole> mHoles;
@@ -129,6 +129,12 @@ public class HolePagerActivity extends FragmentActivity {
 		
 		
 		}
+	}
+
+	@Override
+	public void onHoleUpdated(Hole hole) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

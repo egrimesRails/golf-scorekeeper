@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/RelativeLayout01"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+     >
 
     <TextView
         android:id="@+id/holeNumber"
@@ -21,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/scoreDown"
         android:layout_alignParentLeft="true"
-        android:layout_marginBottom="14dp"
+        android:layout_marginBottom="10dp"
         android:text="@string/score_label"
         android:textSize="25sp" />
 
@@ -99,29 +100,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/puttsDown"
-        android:layout_marginBottom="14dp"
+        android:layout_marginBottom="10dp"
         android:layout_alignParentLeft="true"
         android:text="@string/putts_label"
         android:textSize="25sp" />
-
-    <TextView
-        android:id="@+id/totals"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/scoreBoardText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:text="total"
-        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/tvPuttsTotals"
         style="@style/scoreBoardText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/puttsLabel"
+        android:layout_alignBottom="@+id/puttsLabel"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:text="TextView"
+        android:text="@string/putts_total"
+        android:textStyle="normal|italic"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/totals"
+        style="@style/scoreBoardText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/scoreLabel"
+        android:layout_alignBottom="@+id/scoreLabel"
+        android:layout_alignParentRight="true"
+        android:text="@string/score_total"
+        android:textStyle="normal|italic"
         android:textSize="20sp" />
 
 </RelativeLayout>

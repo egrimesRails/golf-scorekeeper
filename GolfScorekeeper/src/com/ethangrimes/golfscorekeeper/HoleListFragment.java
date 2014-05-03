@@ -6,9 +6,12 @@ package com.ethangrimes.golfscorekeeper;
 import java.util.ArrayList;
 
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.Menu;
@@ -22,11 +25,19 @@ import android.widget.TextView;
 
 /**
  * @author Ethan
- * Fragment hold list of holes.
+ * Fragment to hold list of holes.
  */
 public class HoleListFragment extends ListFragment {
 
 	private ArrayList<Hole> mHoles;
+	private Callbacks mCallbacks;
+	private Typeface font;
+	
+	//interface required for hosting activities
+	public interface Callbacks {
+		
+		void onHoleSelected(Hole hole);
+	}
 	
 	/** 
 	 * 
@@ -56,12 +67,7 @@ public class HoleListFragment extends ListFragment {
 		//Get the hole from the adapter
 		Hole c = ((HoleAdapter)getListAdapter()).getItem(position);
 		
-		//Start HolePagerActivity on a list item click, adding the hole id to intent
-		Intent i = new Intent(getActivity(), HolePagerActivity.class);
-		
-		i.putExtra(HoleFragment.EXTRA_HOLE_ID, c.getId());
-		
-		startActivity(i);
+		mCallbacks.onHoleSelected(c);
 	}
 	
 	
@@ -90,15 +96,29 @@ public class HoleListFragment extends ListFragment {
 			
 			//set hole text and get variable
 			TextView holeNumberTextView = (TextView) convertView.findViewById(R.id.list_hole);
-			holeNumberTextView.setText("Hole# " + c.getHoleNumber());
+			font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/bernhc.ttf");
+			holeNumberTextView.setTypeface(font);
+			
+			//change hole number to green if hole has been played
+			if(c.getScore() > 0) {
+				holeNumberTextView.setTextColor(Color.GREEN);
+				holeNumberTextView.setText(c.getHoleNumber());
+			} else {
+				holeNumberTextView.setTextColor(Color.WHITE);
+				holeNumberTextView.setText(c.getHoleNumber());
+			}
 			
 			//set score text and get score
 			TextView scoreTextView = (TextView) convertView.findViewById(R.id.list_score);
 			scoreTextView.setText("Score:" + c.getScore());
+			scoreTextView.setTypeface(font);
+			scoreTextView.setTextColor(Color.WHITE);
 			
 			//set putts score and get putts
 			TextView puttsTextView = (TextView) convertView.findViewById(R.id.list_putts);
 			puttsTextView.setText("Putts:" + c.getPutts());
+			puttsTextView.setTypeface(font);
+			puttsTextView.setTextColor(Color.WHITE);
 			
 			return convertView;
 		}
@@ -173,6 +193,33 @@ public class HoleListFragment extends ListFragment {
 		default:
 			return super.onOptionsItemSelected(item);
 		}
+		
+	}
+
+	/**host the activity when fragment attaches to it
+	 * 
+	 */
+	@Override
+	public void onAttach(Activity activity) {
+		
+		super.onAttach(activity);
+		mCallbacks = (Callbacks)activity;
+	}
+
+	/** 
+	 *set callbacks to null when fragment is detached 
+	 */
+	@Override
+	public void onDetach() {
+		
+		super.onDetach();
+		mCallbacks = null;
+	}
+	
+	/**Reload HoleListFragments list*/
+	public void updateUI() {
+		
+		((HoleAdapter)getListAdapter()).notifyDataSetChanged();
 		
 	}
 
