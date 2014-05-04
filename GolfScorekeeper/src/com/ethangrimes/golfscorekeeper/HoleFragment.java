@@ -1,6 +1,5 @@
 package com.ethangrimes.golfscorekeeper;
 
-import java.util.ArrayList;
 import java.util.UUID;
 
 import android.support.v4.app.Fragment;
@@ -149,10 +148,20 @@ public class HoleFragment extends Fragment  {
 					mHole.setScore(mScoreNumber);
 					mScore.setText("-");
 				}
+				
+				
+				
 				HoleSingleton.get(getActivity()).calculateTotals();
 				mCallbacks.onHoleUpdated(mHole);
 				mTotals.setText(Integer.toString(mHole.getTotalScore()));
 				mPuttsTotals.setText(Integer.toString(mHole.getTotalPutts()));
+				
+				//if score is entered it can't be 0, change the text color
+				if(mHole.getScore() != 0) {
+					mHoleNumber.setTextColor(Color.GREEN);
+				} else if (mHole.getScore() == 0){
+					mHoleNumber.setTextColor(Color.WHITE);
+				}
 			}
 		});
 		
@@ -182,6 +191,13 @@ public class HoleFragment extends Fragment  {
 				mCallbacks.onHoleUpdated(mHole);
 				mTotals.setText(Integer.toString(mHole.getTotalScore()));
 				mPuttsTotals.setText(Integer.toString(mHole.getTotalPutts()));
+				
+				//if score is entered it can't be 0, change the text color
+				if(mHole.getScore() != 0) {
+					mHoleNumber.setTextColor(Color.GREEN);
+				} else if (mHole.getScore() == 0){
+					mHoleNumber.setTextColor(Color.WHITE);
+				}
 			}
 		});
 		
@@ -218,6 +234,13 @@ public class HoleFragment extends Fragment  {
 				mCallbacks.onHoleUpdated(mHole);
 				mTotals.setText(Integer.toString(mHole.getTotalScore()));
 				mPuttsTotals.setText(Integer.toString(mHole.getTotalPutts()));
+				
+				//if score is entered it can't be 0, change the text color
+				if(mHole.getScore() != 0) {
+					mHoleNumber.setTextColor(Color.GREEN);
+				} else if (mHole.getScore() == 0){
+					mHoleNumber.setTextColor(Color.WHITE);
+				}
 			}
 		});
 		
@@ -248,6 +271,13 @@ public class HoleFragment extends Fragment  {
 				mCallbacks.onHoleUpdated(mHole);
 				mTotals.setText(Integer.toString(mHole.getTotalScore()));
 				mPuttsTotals.setText(Integer.toString(mHole.getTotalPutts()));
+				
+				//if score is entered it can't be 0, change the text color
+				if(mHole.getScore() != 0) {
+					mHoleNumber.setTextColor(Color.GREEN);
+				} else if (mHole.getScore() == 0){
+					mHoleNumber.setTextColor(Color.WHITE);
+				}
 				
 			}
 			
@@ -338,20 +368,7 @@ public class HoleFragment extends Fragment  {
 		mPuttsTotals.setText(Integer.toString(mHole.getTotalPutts()));
 	}
 	
-	/* (non-Javadoc)
-	 * @see android.support.v4.app.Fragment#onHiddenChanged(boolean)
-	 */
-	@Override
-	public void onHiddenChanged(boolean hidden) {
-		super.onHiddenChanged(hidden);
-		
-		if (hidden) {
-			
-			HoleSingleton.get(getActivity()).calculateTotals();
-			mTotals.setText(Integer.toString(mHole.getTotalScore()));
-			mPuttsTotals.setText(Integer.toString(mHole.getTotalPutts()));
-		}	
-	}
+	
 
 
 	/** get access to hosting activity when fragments attached

@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView 
+    android:layout_width="fill_parent" android:layout_height="fill_parent" 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+<RelativeLayout 
+    
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     >
 
     <TextView
@@ -106,23 +110,27 @@
         android:textSize="25sp" />
 
     <TextView
-        android:id="@+id/totals"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/scoreBoardText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:text="total"
-        android:textSize="20sp" />
-
-    <TextView
         android:id="@+id/tvPuttsTotals"
         style="@style/scoreBoardText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/putts"
+        android:layout_alignBottom="@+id/putts"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
+        android:layout_marginRight="20dp"
         android:text="TextView"
         android:textSize="20sp" />
 
+    <TextView
+        android:id="@+id/totals"
+        style="@style/scoreBoardText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/score"
+        android:layout_alignBottom="@+id/score"
+        android:layout_alignLeft="@+id/tvPuttsTotals"
+        android:text="total"
+        android:textSize="20sp" />
+
 </RelativeLayout>
+</ScrollView>

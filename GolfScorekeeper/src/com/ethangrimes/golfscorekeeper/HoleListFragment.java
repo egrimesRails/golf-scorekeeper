@@ -6,10 +6,10 @@ package com.ethangrimes.golfscorekeeper;
 import java.util.ArrayList;
 
 
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -109,16 +109,16 @@ public class HoleListFragment extends ListFragment {
 			}
 			
 			//set score text and get score
-			TextView scoreTextView = (TextView) convertView.findViewById(R.id.list_score);
-			scoreTextView.setText("Score:" + c.getScore());
-			scoreTextView.setTypeface(font);
-			scoreTextView.setTextColor(Color.WHITE);
+			//TextView scoreTextView = (TextView) convertView.findViewById(R.id.list_score);
+			//scoreTextView.setText("Score:" + c.getScore());
+			//scoreTextView.setTypeface(font);
+			//scoreTextView.setTextColor(Color.WHITE);
 			
 			//set putts score and get putts
-			TextView puttsTextView = (TextView) convertView.findViewById(R.id.list_putts);
-			puttsTextView.setText("Putts:" + c.getPutts());
-			puttsTextView.setTypeface(font);
-			puttsTextView.setTextColor(Color.WHITE);
+			//TextView puttsTextView = (TextView) convertView.findViewById(R.id.list_putts);
+			//puttsTextView.setText("Putts:" + c.getPutts());
+			//puttsTextView.setTypeface(font);
+			//puttsTextView.setTextColor(Color.WHITE);
 			
 			return convertView;
 		}
