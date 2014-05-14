@@ -13,7 +13,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:text="@string/one"
-        android:textSize="50sp" />
+        android:textSize="60sp" />
 
     <TextView
         android:id="@+id/scoreLabel"
@@ -106,27 +106,27 @@
         android:textSize="25sp" />
 
     <TextView
-        android:id="@+id/tvPuttsTotals"
-        style="@style/scoreBoardText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/puttsLabel"
-        android:layout_alignBottom="@+id/puttsLabel"
-        android:layout_alignParentRight="true"
-        android:text="@string/putts_total"
-        android:textStyle="normal|italic"
-        android:textSize="20sp" />
-
-    <TextView
         android:id="@+id/totals"
         style="@style/scoreBoardText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/scoreLabel"
         android:layout_alignBottom="@+id/scoreLabel"
-        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/scoreUp"
         android:text="@string/score_total"
-        android:textStyle="normal|italic"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:textStyle="normal|italic" />
+
+    <TextView
+        android:id="@+id/tvPuttsTotals"
+        style="@style/scoreBoardText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/puttsLabel"
+        android:layout_alignBottom="@+id/puttsLabel"
+        android:layout_toRightOf="@+id/puttsUp"
+        android:text="@string/putts_total"
+        android:textSize="20sp"
+        android:textStyle="normal|italic" />
 
 </RelativeLayout>

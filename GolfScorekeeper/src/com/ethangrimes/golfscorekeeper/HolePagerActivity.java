@@ -11,18 +11,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.util.Log;
-import android.widget.Adapter;
-import android.widget.TextView;
 /**
  * @author Ethan
  *
  */
 public class HolePagerActivity extends FragmentActivity implements HoleFragment.Callbacks {
-	private static final String TAG = "HolePagerActivity";
+	
 	private ViewPager mViewPager;
 	private ArrayList<Hole> mHoles;
 	
@@ -136,5 +132,7 @@ public class HolePagerActivity extends FragmentActivity implements HoleFragment.
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 
 }

@@ -23,7 +23,7 @@ import android.widget.TextView;
  * and views to allow score entry
  * */
 public class HoleFragment extends Fragment  {
-	private static final String TAG = "HoleFragment";
+	
 	public static final String EXTRA_HOLE_ID = "com.ethangrimes.golfscorekeeper.hole_id";
 	
 	private Hole mHole;

@@ -57,6 +57,10 @@ public class HoleListFragment extends ListFragment {
 		HoleAdapter adapter = new HoleAdapter(mHoles);
 		
 		setListAdapter(adapter);
+		
+		setRetainInstance(true);
+		
+		
 	}
 
 	/**Logic when a list item is selected. 
@@ -79,7 +83,7 @@ public class HoleListFragment extends ListFragment {
 			super(getActivity(), 0, holes);
 			
 		}
-
+		
 		/**Returns a custom layout populated with the hole data.*/
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
@@ -89,6 +93,7 @@ public class HoleListFragment extends ListFragment {
 			//inflate the custom layout for listview if one does not exist
 			if(convertView == null){
 				convertView = getActivity().getLayoutInflater().inflate(R.layout.list_item_holes, null);
+				
 			}
 			
 			//Configure the view for one hole list item
@@ -222,6 +227,21 @@ public class HoleListFragment extends ListFragment {
 		((HoleAdapter)getListAdapter()).notifyDataSetChanged();
 		
 	}
+
+	/**Forces first hole to display onStart()
+	 * 
+	 */
+	@Override
+	public void onStart() {
+		
+		super.onStart();
+		
+		Hole c = ((HoleAdapter)getListAdapter()).getItem(0);
+		
+		mCallbacks.onHoleSelected(c);
+	}
+
+	
 
 	
 	
