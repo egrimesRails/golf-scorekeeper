@@ -1,6 +1,5 @@
 package com.ethangrimes.golfscorekeeper;
 
-import java.util.Date;
 import java.util.UUID;
 
 import org.json.JSONException;
@@ -20,7 +19,6 @@ public class Hole {
 	private int mScore;
 	private int mPutts;
 	private String mHoleNumber;
-	private Date mDate;
 	private int mTotalScore;
 	private int mTotalPutts;
 	
@@ -114,19 +112,7 @@ public class Hole {
 		return mHoleId;
 	}
 
-	/**
-	 * @return the date
-	 */
-	public Date getDate() {
-		return mDate;
-	}
-
-	/**
-	 * @param date the date to set
-	 */
-	public void setDate(Date date) {
-		mDate = date;
-	}
+	
 
 	public JSONObject toJSON() throws JSONException {
 		

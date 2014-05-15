@@ -45,8 +45,8 @@ public final class R {
         public static final int scoreDown=0x7f050006;
         public static final int scoreLabel=0x7f050005;
         public static final int scoreUp=0x7f050008;
-        public static final int totals=0x7f05000e;
-        public static final int tvPuttsTotals=0x7f05000d;
+        public static final int totals=0x7f05000d;
+        public static final int tvPuttsTotals=0x7f05000e;
         public static final int viewPager=0x7f050000;
     }
     public static final class layout {
